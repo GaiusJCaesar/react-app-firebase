@@ -6,14 +6,7 @@ jobs:
       - image: cimg/node:17.4.0
     steps:
       - checkout
-      - run:
-          name: Update NPM
-          command: "sudo npm install -g npm"
-      - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install Dependencies
-          command: npm install
+      - run: yarn install 
       - run: npm install --save-dev firebase-tools    
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -21,7 +14,7 @@ jobs:
             - ./node_modules
       - run:
           name: Build application for production
-          command: npm run build 
+          command: yarn build
       - run:
           name: Deploy app to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN  
