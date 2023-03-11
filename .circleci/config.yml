@@ -6,23 +6,12 @@ jobs:
       - image: cimg/node:17.4.0
     steps:
       - checkout
-<<<<<<< HEAD
-      - run: yarn 
-=======
-      - run: yarn install 
-      - run: npm install --save-dev firebase-tools    
->>>>>>> b4ac9fa278fbe694bd1658638cea1e1013cd26e4
+      - run: "yarn"
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
-<<<<<<< HEAD
       - run: yarn build
-=======
-      - run:
-          name: Build application for production
-          command: yarn build
->>>>>>> b4ac9fa278fbe694bd1658638cea1e1013cd26e4
       - run:
           name: Deploy app to Firebase
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN  
